@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Бюджет</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="title">Бюджет</div>
+  <button id="syncBtn" class="sync" type="button">
+    <span id="syncText">Передать</span>
+    <span id="pendingBadge" class="badge" hidden>0</span>
+  </button>
+</header>
+
+<main>
+  <!-- Ввод -->
+  <section id="view-add" class="view active">
+    <div class="seg" id="signSeg">
+      <button type="button" data-sign="-1" class="on">Расход</button>
+      <button type="button" data-sign="1">Приход</button>
+    </div>
+
+    <input id="amount" class="amount" inputmode="decimal" autocomplete="off" placeholder="0 ₽">
+
+    <div class="label">Откуда</div>
+    <div id="accounts" class="chips"></div>
+
+    <div class="label">Статья <button id="allArticlesBtn" class="link" type="button">все статьи</button></div>
+    <div id="favorites" class="chips"></div>
+    <div id="chosenArticle" class="chosen" hidden></div>
+
+    <div class="label">Комментарий</div>
+    <input id="comment" class="field" autocomplete="off" placeholder="Можно надиктовать с клавиатуры">
+
+    <div class="label">Дата</div>
+    <input id="date" class="field" type="date">
+
+    <button id="saveBtn" class="primary" type="button">Сохранить</button>
+  </section>
+
+  <!-- История -->
+  <section id="view-list" class="view">
+    <div id="list" class="list"></div>
+  </section>
+
+  <!-- Настройки -->
+  <section id="view-settings" class="view">
+    <div class="label">Адрес скрипта таблицы</div>
+    <input id="cfgUrl" class="field" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec">
+    <div class="label">Секретный ключ</div>
+    <input id="cfgKey" class="field" type="password" autocomplete="off">
+    <button id="cfgSave" class="primary" type="button">Сохранить и проверить связь</button>
+    <button id="refsBtn" class="secondary" type="button">Обновить справочник статей</button>
+    <p id="cfgInfo" class="hint"></p>
+    <p class="hint">Ключ хранится только в этом телефоне. Без связи записи копятся здесь и уходят в таблицу,
+      когда появится интернет, или по кнопке «Передать».</p>
+  </section>
+</main>
+
+<nav class="tabs">
+  <button type="button" data-view="add" class="on">Ввод</button>
+  <button type="button" data-view="list">История</button>
+  <button type="button" data-view="settings">Настройки</button>
+</nav>
+
+<!-- Выбор статьи -->
+<div id="picker" class="picker" hidden>
+  <div class="picker-head">
+    <input id="search" class="field" placeholder="Поиск статьи" autocomplete="off">
+    <button id="pickerClose" class="link" type="button">Готово</button>
+  </div>
+  <p class="hint pad">★ — добавить или убрать из избранного</p>
+  <div id="articleList" class="list"></div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<script src="defaults.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
